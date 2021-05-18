@@ -14,7 +14,7 @@
             android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:scaleType="centerCrop"
-            app:riv_corner_radius="2dp"/>
+            app:riv_corner_radius="24dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.Conversations.Subhead"/>
+                android:textAppearance="@style/TextAppearance.Conversations.Subhead.Bold"/>
 
             <TextView
                 android:id="@+id/contact_jid"

@@ -25,7 +25,7 @@
                     android:layout_height="56dp"
                     android:layout_alignParentLeft="true"
                     android:scaleType="centerCrop"
-                    app:riv_corner_radius="2dp" />
+                    app:riv_corner_radius="28dp" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -43,7 +43,7 @@
                         android:paddingRight="4dp"
                         android:maxLines="1"
                         android:ellipsize="end"
-                        android:textAppearance="@style/TextAppearance.Conversations.Subhead" />
+                        android:textAppearance="@style/TextAppearance.Conversations.Subhead.Bold" />
 
                     <RelativeLayout
                         android:id="@+id/conversation_lastwrapper"

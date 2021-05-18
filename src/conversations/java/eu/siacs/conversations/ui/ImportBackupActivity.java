@@ -199,7 +199,7 @@ public class ImportBackupActivity extends ActionBarActivity implements ServiceCo
     @Override
     public void onBackupRestored() {
         runOnUiThread(() -> {
-            Intent intent = new Intent(this, ConversationActivity.class);
+            Intent intent = new Intent(this, SplashActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
