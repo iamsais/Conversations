@@ -965,4 +965,10 @@
     <string name="no_active_accounts_support_this">No active accounts support this feature</string>
     <string name="backup_started_message">The backup has been started. You’ll get a notification once it has been completed.</string>
     <string name="unable_to_enable_video">Unable to enable video.</string>
+
+    <!--Mingling -->
+    <string name="already_have_account">Already have account? </string>
+    <string name="login"><U>Login</U></string>
+    <string name="need_an_account">Need an account? </string>
+    <string name="create_here"><U>Create here</U></string>
 </resources>

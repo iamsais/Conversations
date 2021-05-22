@@ -40,6 +40,9 @@
 	<color name="green800">#ff1f0066</color>
 	<color name="green900">#ff1f0066</color>
 
+	<color name="gold">#fff5d339</color>
+	<color name="pink">#ffe74b82</color>
+
 	<color name="green700_desaturated">#ff4d8e50</color> <!-- desaturated by 15 -->
 	<color name="green900_desaturated">#ff295e2d</color> <!-- desaturated by 15 -->
 

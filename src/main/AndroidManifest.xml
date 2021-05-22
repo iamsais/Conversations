@@ -82,6 +82,36 @@
         </receiver>
 
         <activity
+            android:name=".mingling.ui.LoginActivity"
+            android:label="Login"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".mingling.ui.GetStartedActivity"
+            android:label="Get Started"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".mingling.ui.RegisterActivity"
+            android:label="Register"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".mingling.ui.StartGetEmailActivity"
+            android:label="Get Email"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".mingling.ui.StartGetPasswordActivity"
+            android:label="Get Password"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".mingling.ui.StartGetWorkspaceActivity"
+            android:label="Workspace"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".ui.ShareLocationActivity"
             android:label="@string/title_activity_share_location" />
         <activity
