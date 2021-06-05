@@ -11,12 +11,12 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/message_photo"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
-        app:riv_corner_radius="24dp" />
+        app:riv_corner_radius="16dp" />
 
     <LinearLayout
         android:id="@+id/message_box"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/message_photo"
-        android:background="@drawable/message_bubble_received"
+        android:background="@drawable/message_bubble_received_white"
         android:minHeight="53dp"
         android:layout_marginTop="-2dp"
         android:layout_marginRight="-4dp"

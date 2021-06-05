@@ -228,8 +228,8 @@
     <string name="select">Seleccioneu</string>
     <string name="contact_already_exists">El contacte ja existeix</string>
     <string name="join">Entra</string>
-    <string name="channel_full_jid_example">channel@conference.example.com/nick</string>
-    <string name="channel_bare_jid_example">channel@conference.example.com</string>
+    <string name="channel_full_jid_example">channel@conference.cherrypickk.com/nick</string>
+    <string name="channel_bare_jid_example">channel@conference.cherrypickk.com</string>
     <string name="save_as_bookmark">Desa com a marcador</string>
     <string name="delete_bookmark">Elimina dels marcadors</string>
     <string name="destroy_room">Destrueix el xat en grup</string>
@@ -522,7 +522,7 @@
     <string name="share_uri_with">Comparteix l\'URI amb…</string>
     <string name="welcome_text_quicksy"><![CDATA[Quicksy és un spin off del popular client XMPP Conversations amb descobriment automàtic de contactes.<br><br>Si es registra amb el seu número de telèfon i Quicksy,--basant-se en els números de telèfon de la seva agenda--li suggereix automàticament possibles contactes.<br><br>En inscriure\'s, accepta nostra <a href="https://quicksy.im/#privacy">política de privacitat</a>.]]></string>
     <string name="agree_and_continue">Acceptar i continuar</string>
-    <string name="magic_create_text">S\'ha establert una guia per a la creació de comptes en conversations.im.¹\nEn triar conversations.im com a proveïdor podràs comunicar-te amb usuaris d\'altres proveïdors donant-los la teva adreça XMPP completa.</string>
+    <string name="magic_create_text">S\'ha establert una guia per a la creació de comptes en cherrypickk.com.¹\nEn triar cherrypickk.com com a proveïdor podràs comunicar-te amb usuaris d\'altres proveïdors donant-los la teva adreça XMPP completa.</string>
     <string name="your_full_jid_will_be">La seva adreça XMPP completa serà: %s</string>
     <string name="create_account">Crear compte</string>
     <string name="use_own_provider">Utilitza el meu propi proveïdor</string>

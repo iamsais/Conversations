@@ -36,8 +36,8 @@ public class GetStartedActivity extends AppCompatActivity {
         context = this;
         activity = this;
 
-        binding.login.setOnClickListener(v -> new GeneralUtils(this)
-                .openActivity(this, LoginActivity.class, null, true));
+        binding.signIn.setOnClickListener(v -> new GeneralUtils(this)
+                .openActivity(this, StartGetWorkspaceActivity.class, null, true));
 
         binding.getstarted.setOnClickListener(v -> {
             Map<String, String> values = new HashMap<>();

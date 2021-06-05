@@ -45,6 +45,6 @@ public class User {
     @SerializedName("roles")
     private List<String> roles;
 
-    @SerializedName("organization")
+    @SerializedName("organizations")
     private List<String> organizations;
 }

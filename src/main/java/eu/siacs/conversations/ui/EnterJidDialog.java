@@ -30,7 +30,7 @@ import eu.siacs.conversations.xmpp.Jid;
 public class EnterJidDialog extends DialogFragment implements OnBackendConnected, TextWatcher {
 
 
-	private static final List<String> SUSPICIOUS_DOMAINS = Arrays.asList("conference","muc","room","rooms","chat");
+	private static final List<String> SUSPICIOUS_DOMAINS = Arrays.asList("conference", "muc", "room", "rooms", "chat");
 
 	private OnEnterJidDialogPositiveListener mListener = null;
 
@@ -39,6 +39,7 @@ public class EnterJidDialog extends DialogFragment implements OnBackendConnected
 	private static final String PREFILLED_JID_KEY = "prefilled_jid";
 	private static final String ACCOUNT_KEY = "account";
 	private static final String ALLOW_EDIT_JID_KEY = "allow_edit_jid";
+	private static final String MULTIPLE_ACCOUNTS = "multiple_accounts_enabled";
 	private static final String ACCOUNTS_LIST_KEY = "activated_accounts_list";
 	private static final String SANITY_CHECK_JID = "sanity_check_jid";
 
@@ -49,13 +50,11 @@ public class EnterJidDialog extends DialogFragment implements OnBackendConnected
 	private AlertDialog dialog;
 	private boolean sanityCheckJid = false;
 
-
 	private boolean issuedWarning = false;
 
 	public static EnterJidDialog newInstance(final List<String> activatedAccounts,
-	                                         final String title, final String positiveButton,
-	                                         final String prefilledJid, final String account,
-											 boolean allowEditJid, final boolean sanity_check_jid) {
+											 final String title, final String positiveButton,
+											 final String prefilledJid, final String account, boolean allowEditJid, boolean multipleAccounts, final boolean sanity_check_jid) {
 		EnterJidDialog dialog = new EnterJidDialog();
 		Bundle bundle = new Bundle();
 		bundle.putString(TITLE_KEY, title);
@@ -63,6 +62,7 @@ public class EnterJidDialog extends DialogFragment implements OnBackendConnected
 		bundle.putString(PREFILLED_JID_KEY, prefilledJid);
 		bundle.putString(ACCOUNT_KEY, account);
 		bundle.putBoolean(ALLOW_EDIT_JID_KEY, allowEditJid);
+		bundle.putBoolean(MULTIPLE_ACCOUNTS, multipleAccounts);
 		bundle.putStringArrayList(ACCOUNTS_LIST_KEY, (ArrayList<String>) activatedAccounts);
 		bundle.putBoolean(SANITY_CHECK_JID, sanity_check_jid);
 		dialog.setArguments(bundle);
@@ -108,6 +108,15 @@ public class EnterJidDialog extends DialogFragment implements OnBackendConnected
 		DelayedHintHelper.setHint(R.string.account_settings_example_jabber_id, binding.jid);
 
 		String account = getArguments().getString(ACCOUNT_KEY);
+
+		if (getArguments().getBoolean(MULTIPLE_ACCOUNTS)) {
+			binding.yourAccount.setVisibility(View.VISIBLE);
+			binding.account.setVisibility(View.VISIBLE);
+		} else {
+			binding.yourAccount.setVisibility(View.GONE);
+			binding.account.setVisibility(View.GONE);
+		}
+
 		if (account == null) {
 			StartConversationActivity.populateAccountSpinner(getActivity(), getArguments().getStringArrayList(ACCOUNTS_LIST_KEY), binding.account);
 		} else {
@@ -118,8 +127,6 @@ public class EnterJidDialog extends DialogFragment implements OnBackendConnected
 			adapter.setDropDownViewResource(R.layout.simple_list_item);
 			binding.account.setAdapter(adapter);
 		}
-
-
 
 		builder.setView(binding.getRoot());
 		builder.setNegativeButton(R.string.cancel, null);
@@ -165,13 +172,13 @@ public class EnterJidDialog extends DialogFragment implements OnBackendConnected
 		if (!issuedWarning && sanityCheckJid) {
 			if (contactJid.isDomainJid()) {
 				binding.jidLayout.setError(getActivity().getString(R.string.this_looks_like_a_domain));
-				dialog.getButton(AlertDialog.BUTTON_POSITIVE).setText(R.string.add_anway);
+				dialog.getButton(AlertDialog.BUTTON_POSITIVE).setText(R.string.add_anyway);
 				issuedWarning = true;
 				return;
 			}
 			if (suspiciousSubDomain(contactJid.getDomain().toEscapedString())) {
 				binding.jidLayout.setError(getActivity().getString(R.string.this_looks_like_channel));
-				dialog.getButton(AlertDialog.BUTTON_POSITIVE).setText(R.string.add_anway);
+				dialog.getButton(AlertDialog.BUTTON_POSITIVE).setText(R.string.add_anyway);
 				issuedWarning = true;
 				return;
 			}

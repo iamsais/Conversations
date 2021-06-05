@@ -165,6 +165,9 @@ import eu.siacs.conversations.xmpp.stanzas.MessagePacket;
 import eu.siacs.conversations.xmpp.stanzas.PresencePacket;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
+import static eu.siacs.conversations.ui.SettingsActivity.ENABLE_MULTI_ACCOUNTS;
+import static eu.siacs.conversations.ui.SettingsActivity.SHOW_OWN_ACCOUNTS;
+
 public class XmppConnectionService extends Service {
 
     public static final String ACTION_REPLY_TO_CONVERSATION = "reply_to_conversations";
@@ -2274,7 +2277,7 @@ public class XmppConnectionService extends Service {
         databaseBackend.createAccount(account);
         this.accounts.add(account);
         this.reconnectAccountInBackground(account);
-        updateAccountUi();
+        //updateAccountUi();
         syncEnabledAccountSetting();
         toggleForegroundService();
     }
@@ -4079,6 +4082,14 @@ public class XmppConnectionService extends Service {
 
     public boolean broadcastLastActivity() {
         return getBooleanPreference(SettingsActivity.BROADCAST_LAST_ACTIVITY, R.bool.last_activity);
+    }
+
+    public boolean multipleAccounts() {
+        return getBooleanPreference(SettingsActivity.ENABLE_MULTI_ACCOUNTS, R.bool.enable_multi_accounts);
+    }
+
+    public boolean showOwnAccounts() {
+        return getBooleanPreference(SHOW_OWN_ACCOUNTS, R.bool.show_own_accounts);
     }
 
     public int unreadCount() {

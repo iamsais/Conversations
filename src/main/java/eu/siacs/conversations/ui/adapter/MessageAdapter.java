@@ -87,6 +87,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     private OnContactPictureClicked mOnContactPictureClickedListener;
     private OnContactPictureLongClicked mOnContactPictureLongClickedListener;
     private boolean mUseGreenBackground = false;
+    private boolean mIndicateReceived = true;
 
     public MessageAdapter(XmppActivity activity, List<Message> messages) {
         super(activity, 0, messages);
@@ -204,10 +205,26 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 info = getContext().getString(R.string.offering);
                 break;
             case Message.STATUS_SEND_RECEIVED:
+                if (mIndicateReceived) {
+                    if (viewHolder.indicatorReceived != null) {
+                        viewHolder.indicatorReceived.setVisibility(View.VISIBLE);
+                        viewHolder.indicatorReceived.setImageResource(darkBackground ? R.drawable.ic_check_white_18dp : R.drawable.ic_check_black_18dp);
+                        viewHolder.indicatorReceived.setAlpha(darkBackground ? 0.7f : 0.57f);
+                    }
+                } else {
+                    viewHolder.indicatorReceived.setVisibility(View.GONE);
+                }
+                break;
             case Message.STATUS_SEND_DISPLAYED:
-                viewHolder.indicatorReceived.setImageResource(darkBackground ? R.drawable.ic_done_white_18dp : R.drawable.ic_done_black_18dp);
-                viewHolder.indicatorReceived.setAlpha(darkBackground ? 0.7f : 0.57f);
-                viewHolder.indicatorReceived.setVisibility(View.VISIBLE);
+                if (mIndicateReceived) {
+                    if (viewHolder.indicatorReceived != null) {
+                        viewHolder.indicatorReceived.setVisibility(View.VISIBLE);
+                        viewHolder.indicatorReceived.setImageResource(darkBackground ? R.drawable.ic_check_all_white_18dp : R.drawable.ic_check_all_black_18dp);
+                        viewHolder.indicatorReceived.setAlpha(darkBackground ? 0.7f : 0.57f);
+                    }
+                } else {
+                    viewHolder.indicatorReceived.setVisibility(View.GONE);
+                }
                 break;
             case Message.STATUS_SEND_FAILED:
                 final String errorMessage = message.getErrorMessage();

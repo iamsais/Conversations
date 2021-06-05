@@ -82,6 +82,7 @@ public class BlocklistActivity extends AbstractSearchableListItemActivity implem
 				null,
 				account.getJid().asBareJid().toEscapedString(),
 				true,
+				false,
 				false
 		);
 

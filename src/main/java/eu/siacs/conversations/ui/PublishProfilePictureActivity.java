@@ -23,9 +23,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.entities.Account;
+import eu.siacs.conversations.mingling.utils.GeneralUtils;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.interfaces.OnAvatarPublication;
 import eu.siacs.conversations.utils.PhoneHelper;
+
+import static eu.siacs.conversations.mingling.utils.Constants.KEY_USER_PROFILE_URI;
 
 public class PublishProfilePictureActivity extends XmppActivity implements XmppConnectionService.OnAccountUpdate, OnAvatarPublication {
 
@@ -92,6 +95,15 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         this.publishButton = findViewById(R.id.publish_button);
         this.hintOrWarning = findViewById(R.id.hint_or_warning);
         this.secondaryHint = findViewById(R.id.secondary_hint);
+
+        // Set profile image from google login
+//        String photoUrl = GeneralUtils.getPreferenceValue(KEY_USER_PROFILE_URI);
+//        if(photoUrl != null && !photoUrl.isEmpty()){
+//            avatarUri = Uri.parse(photoUrl);
+//            if(avatarUri != null)
+//                loadImageIntoPreview(avatarUri);
+//        }
+
         this.publishButton.setOnClickListener(v -> {
             if (avatarUri != null) {
                 publishing = true;

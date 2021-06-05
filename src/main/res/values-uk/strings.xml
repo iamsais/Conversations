@@ -220,8 +220,8 @@
     <string name="select">Вибрати</string>
     <string name="contact_already_exists">Контакт уже існує</string>
     <string name="join">Приєднатися</string>
-    <string name="channel_full_jid_example">channel@conference.example.com/nick</string>
-    <string name="channel_bare_jid_example">channel@conference.example.com</string>
+    <string name="channel_full_jid_example">channel@conference.cherrypickk.com/nick</string>
+    <string name="channel_bare_jid_example">channel@conference.cherrypickk.com</string>
     <string name="save_as_bookmark">Зберегти до закладок</string>
     <string name="delete_bookmark">Вилучити закладку</string>
     <string name="destroy_room">Вилучити груповий чат</string>

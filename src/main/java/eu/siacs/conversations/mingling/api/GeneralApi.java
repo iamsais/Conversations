@@ -11,4 +11,7 @@ public interface GeneralApi {
     @Headers({"Content-Type: application/json"})
     Call<GeneralResponse> checkTokenValid();
 
+    @GET("/api/token/valid")
+    @Headers({"Content-Type: application/json"})
+    Call<GeneralResponse> verifyIdToken();
 }

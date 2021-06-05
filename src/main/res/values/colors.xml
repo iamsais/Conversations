@@ -34,14 +34,19 @@
 <!--	<color name="green800">#ff2E7D32</color>-->
 <!--	<color name="green900">#ff1B5E20</color>-->
 
-	<color name="green500">#ff582fc0</color>
-	<color name="green600">#ff40199a</color>
-	<color name="green700">#ff1f0066</color>
-	<color name="green800">#ff1f0066</color>
-	<color name="green900">#ff1f0066</color>
+	<color name="message_sent_bubble">#ffefffde</color>
+	<color name="message_received_bubble">#ffD0CCDA</color>
+	<color name="green500">#ff542fa2</color>
+	<color name="green600">#ff4c1e80</color>
+	<color name="green700">#ff4c1e80</color>
+	<color name="green800">#ff4c1e80</color>
+	<color name="green900">#ff4c1e80</color>
 
 	<color name="gold">#fff5d339</color>
 	<color name="pink">#ffe74b82</color>
+
+	<color name="app_blue">#ff67cedf</color>
+	<color name="pink_light">#ffef9fb4</color>
 
 	<color name="green700_desaturated">#ff4d8e50</color> <!-- desaturated by 15 -->
 	<color name="green900_desaturated">#ff295e2d</color> <!-- desaturated by 15 -->

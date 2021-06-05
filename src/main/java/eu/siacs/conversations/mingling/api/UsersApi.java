@@ -18,6 +18,11 @@ public interface UsersApi {
     @Headers({"Content-Type: application/json"})
     Call<GeneralResponse> login(@Body AuthenticationRequest authenticationRequest);
 
+    @POST("/api/login/google")
+    @Headers({"Content-Type: application/json"})
+    Call<GeneralResponse> googleLogin(@Query("id_token") String idToken,
+                                      @Query("email") String email);
+
     @GET("/api/users/{id}")
     @Headers({"Content-Type: application/json"})
     Call<GeneralResponse> getUsers(@Path("id") String id);
@@ -28,6 +33,7 @@ public interface UsersApi {
 
     @GET("/api/users/check")
     @Headers({"Content-Type: application/json"})
-    Call<GeneralResponse> checkUserAvailable(@Query("username") String username);
+    Call<GeneralResponse> checkUserAvailable(@Query("username") String username,
+                                             @Query("org_key") String workspace);
 
 }

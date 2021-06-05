@@ -58,6 +58,9 @@ public class SettingsActivity extends XmppActivity implements
 	public static final String SHOW_DYNAMIC_TAGS = "show_dynamic_tags";
 	public static final String OMEMO_SETTING = "omemo";
 
+	public static final String ENABLE_MULTI_ACCOUNTS = "enable_multi_accounts";
+	public static final String SHOW_OWN_ACCOUNTS = "show_own_accounts";
+
 	public static final int REQUEST_CREATE_BACKUP = 0xbf8701;
 	private SettingsFragment mSettingsFragment;
 

@@ -19,4 +19,7 @@ public class LoginResponse {
     @SerializedName("user")
     private User user;
 
+    @SerializedName("org_id")
+    private String orgId;
+
 }

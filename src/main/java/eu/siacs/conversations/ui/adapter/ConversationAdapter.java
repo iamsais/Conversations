@@ -78,9 +78,9 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         }
 
         if (isRead) {
-            viewHolder.binding.conversationName.setTypeface(null, Typeface.BOLD);
+            //viewHolder.binding.conversationName.setTypeface(null, Typeface.NORMAL);
         } else {
-            viewHolder.binding.conversationName.setTypeface(null, Typeface.BOLD);
+            //viewHolder.binding.conversationName.setTypeface(null, Typeface.BOLD);
             viewHolder.binding.conversationName.setTextColor(activity.getResources().getColor(R.color.green500));
         }
 

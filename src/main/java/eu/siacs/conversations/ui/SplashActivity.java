@@ -1,6 +1,5 @@
 package eu.siacs.conversations.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,16 +30,23 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getSimpleName();
 
+    String userSessionToken = null;
+    String sessionToken = null;
+
     Handler handler;
     Runnable r = new Runnable() {
         @Override
         public void run() {
-			startActivity(new Intent(SplashActivity.this, GetStartedActivity.class));
-			finish();
-//            new GeneralUtils(SplashActivity.this)
-//                    .openActivity(SplashActivity.this, GetStartedActivity.class, null, true);
-//
-//            finish();
+//			startActivity(new Intent(SplashActivity.this, GetStartedActivity.class));
+//			finish();
+            if (TextUtils.isEmpty(userSessionToken))
+                new GeneralUtils(SplashActivity.this)
+                        .openActivity(SplashActivity.this, GetStartedActivity.class, null, true);
+            else
+                new GeneralUtils(SplashActivity.this)
+                        .openActivity(SplashActivity.this, ConversationsActivity.class, null, true);
+
+            finish();
         }
     };
 
@@ -49,7 +55,15 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         handler = new Handler(Looper.getMainLooper());
         GeneralUtils.context = this;
-        String sessionToken = JsonDao.getClientAccessToken();
+
+        userSessionToken = JsonDao.getUserAccessToken();
+        sessionToken = null;
+
+        if (TextUtils.isEmpty(userSessionToken))
+            sessionToken = JsonDao.getClientAccessToken();
+        else
+            handler.postDelayed(r, 2000);
+
         if (TextUtils.isEmpty(sessionToken))
             loginCallApi();
         else
@@ -71,9 +85,9 @@ public class SplashActivity extends AppCompatActivity {
                 Log.d(TAG, "Response Code: " + response.code());
 
                 if (!response.isSuccessful()) {
-                   // Token expired
+                    // Token expired
                     loginCallApi();
-                }else{
+                } else {
                     handler.postDelayed(r, 2000);
                 }
             }

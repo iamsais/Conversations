@@ -3,7 +3,7 @@
 <p align="center">Conversations: the very last word in instant messaging</p>
 
 <p align="center">
-    <a href="https://conversations.im/j/conversations@conference.siacs.eu">
+    <a href="https://cherrypickk.com/j/conversations@conference.siacs.eu">
         <img src="https://inverse.chat/badge.svg?room=conversations@conference.siacs.eu"
              alt="chat on our conference room">
     </a>
@@ -15,7 +15,7 @@
 
 <p align="center">
     <a href="https://play.google.com/store/apps/details?id=eu.siacs.conversations&amp;referrer=utm_source%3Dgithub">
-       <img src="https://conversations.im/images/en-play-badge.png" alt="Google Play">
+       <img src="https://cherrypickk.com/images/en-play-badge.png" alt="Google Play">
     </a>
 </p>
 
@@ -30,9 +30,9 @@
 
 ## Features
 
-* End-to-end encryption with [OMEMO](http://conversations.im/omemo/) or [OpenPGP](http://openpgp.org/about/)
+* End-to-end encryption with [OMEMO](http://cherrypickk.com/omemo/) or [OpenPGP](http://openpgp.org/about/)
 * Send and receive images as well as other kind of files
-* [Encrypted audio and video calls (DTLS-SRTP)](https://help.conversations.im)
+* [Encrypted audio and video calls (DTLS-SRTP)](https://help.cherrypickk.com)
 * Share your location
 * Send voice messages
 * Indication when your contact has read your message
@@ -96,17 +96,17 @@ Buying the App from the Play Store will also give you access to our [beta test](
 I’m listing several options to support me financially on [my website](https://gultsch.de/donate.html). Among other things [Liberapay](https://liberapay.com/iNPUTmice/donate), [GitHub Sponsors](https://github.com/sponsors/inputmice) and bank transfer.
 
 #### How do I create an account?
-XMPP, like email, is a federated protocol, which means that there is not one company you can create an *official XMPP account* with. Instead there are hundreds, or even thousands, of providers out there. One of those providers is our very own [conversations.im](https://account.conversations.im). If you don’t like to use *conversations.im* use a web search engine of your choice to find another provider. Or maybe your university has one. Or you can run your own. Or ask a friend to run one. Once you've found one, you can use Conversations to create an account. Just select *register new account* on server within the create account dialog.
+XMPP, like email, is a federated protocol, which means that there is not one company you can create an *official XMPP account* with. Instead there are hundreds, or even thousands, of providers out there. One of those providers is our very own [cherrypickk.com](https://account.cherrypickk.com). If you don’t like to use *cherrypickk.com* use a web search engine of your choice to find another provider. Or maybe your university has one. Or you can run your own. Or ask a friend to run one. Once you've found one, you can use Conversations to create an account. Just select *register new account* on server within the create account dialog.
 
 ##### Domain hosting
 Using your own domain not only gives you a more recognizable Jabber ID, it also gives you the flexibility to migrate your account between different XMPP providers. This is a good compromise between the responsibilities of having to operate your own server and the downsides of being dependent on a single provider.
 
-Learn more about [conversations.im Jabber/XMPP domain hosting](https://account.conversations.im/domain/). 
+Learn more about [cherrypickk.com Jabber/XMPP domain hosting](https://account.cherrypickk.com/domain/).
 
 ##### Running your own
 If you already have a server somewhere and are willing and able to put the necessary work in you can run your own XMPP server.
 
-As of 2019 we recommend you use [ejabberd](https://ejabberd.im). The default configuration file already enables everything you need to pass the [Conversations Compliance Suite](https://compliance.conversations.im). Make sure your Linux distribution ships a fairly recent version.
+As of 2019 we recommend you use [ejabberd](https://ejabberd.im). The default configuration file already enables everything you need to pass the [Conversations Compliance Suite](https://compliance.cherrypickk.com). Make sure your Linux distribution ships a fairly recent version.
 
 With a little bit of effort [Prosody](https://prosody.im) can be configured to support all necessary extensions as well. However you will have to rely on so called [Community Modules](https://modules.prosody.im/) of varying quality. Prosody can be interesting to people who like to modify their server and create / prototype own modules.
 
@@ -181,7 +181,7 @@ FCM (Google Push) allows an app to wake up from *Doze* which is (as the name sug
 
 #### Conversations doesn’t work for me. Where can I get help?
 
-You can join our conference room on [`conversations@conference.siacs.eu`](https://conversations.im/j/conversations@conference.siacs.eu).
+You can join our conference room on [`conversations@conference.siacs.eu`](https://cherrypickk.com/j/conversations@conference.siacs.eu).
 A lot of people in there are able to answer basic questions about the usage of
 Conversations or can provide you with tips on running your own XMPP server. If
 you found a bug or your app crashes please read the Developer / Report Bugs
@@ -269,7 +269,7 @@ other clients.
 Translations are managed on [Transifex](https://www.transifex.com/projects/p/conversations/).
 If you want to become a translator  Please register on transifex, apply to join
 the translation team and then step by our group chat on
-[conversations@conference.siacs.eu](https://conversations.im/j/conversations@conference.siacs.eu)
+[conversations@conference.siacs.eu](https://cherrypickk.com/j/conversations@conference.siacs.eu)
 and introduce yourself to `iNPUTmice` so he can approve your join request.
 
 #### How do I backup / move Conversations to a new device?
@@ -330,7 +330,7 @@ manage accounts and choose renew PGP announcement from the contextual menu.
 OMEMO is only available in 1:1 chats and private (members-only, non-anonymous) group chats. Encrypting public group chats makes little to no sense since anyone (including a hypothetical attacker) can join and a user couldn’t possibily verify all participants anyway. Furthermore for a lot of public group chat it is desirable to give new comers access to the full history.
 
 #### OMEMO doesn’t work. I get a 'Something went wrong' message in the 'Trust OMEMO Fingerprints' screen.
-OMEMO has two requirements: Your server and the server of your contact need to support PEP. Both of you can verify that individually by opening your account details and selecting ```Server info``` from the menu. The appearing table should list PEP as available. The second requirement is that the initial sender needs to have access to the published key material. This can either be achieved by having mutual presence subscription (you can verify that by opening the contact details and see if both check boxes *Send presence updates* and *Receive presence updates* are checked) or by using a server that makes the public key material accessible to anyone. In the [Compliance Tester](https://compliance.conversations.im) this is indicated by the 'OMEMO' feature. Since it is very common that the first messages are exchanged *before* adding each other to the contact list it is desirable to use servers that have 'OMEMO support'.
+OMEMO has two requirements: Your server and the server of your contact need to support PEP. Both of you can verify that individually by opening your account details and selecting ```Server info``` from the menu. The appearing table should list PEP as available. The second requirement is that the initial sender needs to have access to the published key material. This can either be achieved by having mutual presence subscription (you can verify that by opening the contact details and see if both check boxes *Send presence updates* and *Receive presence updates* are checked) or by using a server that makes the public key material accessible to anyone. In the [Compliance Tester](https://compliance.cherrypickk.com) this is indicated by the 'OMEMO' feature. Since it is very common that the first messages are exchanged *before* adding each other to the contact list it is desirable to use servers that have 'OMEMO support'.
 
 #### How does the encryption for group chats work?
 
@@ -338,7 +338,7 @@ OMEMO has two requirements: Your server and the server of your contact need to s
 
 OMEMO encryption works only in private (members only) conferences that are non-anonymous. Non-anonymous (being able to discover the real JID of other participants) is a technical requirement to discover the key material. Members only is a sort of arbitrary requirement imposed by Conversations. (see 'OMEMO is grayed out')
 
-The server of all participants need to pass the OMEMO [Compliance Test](https://conversations.im/compliance/).
+The server of all participants need to pass the OMEMO [Compliance Test](https://cherrypickk.com/compliance/).
 In other words they either need to run ejabberd 18.01+ or Prosody 0.11+.
 
 (Alternatively it would also work if all participants had each other in their contact list; But that rarely is the case in larger group chats.)

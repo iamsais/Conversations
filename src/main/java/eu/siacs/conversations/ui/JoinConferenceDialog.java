@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
@@ -29,14 +30,17 @@ public class JoinConferenceDialog extends DialogFragment implements OnBackendCon
 
 	private static final String PREFILLED_JID_KEY = "prefilled_jid";
 	private static final String ACCOUNTS_LIST_KEY = "activated_accounts_list";
+	private static final String MULTIPLE_ACCOUNTS = "multiple_accounts_enabled";
 	private JoinConferenceDialogListener mListener;
 	private KnownHostsAdapter knownHostsAdapter;
 
-	public static JoinConferenceDialog newInstance(String prefilledJid, List<String> accounts) {
+	public static JoinConferenceDialog newInstance(String prefilledJid, List<String> accounts, boolean multipleAccounts) {
 		JoinConferenceDialog dialog = new JoinConferenceDialog();
 		Bundle bundle = new Bundle();
 		bundle.putString(PREFILLED_JID_KEY, prefilledJid);
+		bundle.putBoolean(MULTIPLE_ACCOUNTS, multipleAccounts);
 		bundle.putStringArrayList(ACCOUNTS_LIST_KEY, (ArrayList<String>) accounts);
+
 		dialog.setArguments(bundle);
 		return dialog;
 	}
@@ -60,11 +64,18 @@ public class JoinConferenceDialog extends DialogFragment implements OnBackendCon
 		if (prefilledJid != null) {
 			binding.jid.append(prefilledJid);
 		}
+		if (getArguments().getBoolean(MULTIPLE_ACCOUNTS)) {
+			binding.yourAccount.setVisibility(View.VISIBLE);
+			binding.account.setVisibility(View.VISIBLE);
+		} else {
+			binding.yourAccount.setVisibility(View.GONE);
+			binding.account.setVisibility(View.GONE);
+		}
 		StartConversationActivity.populateAccountSpinner(getActivity(), getArguments().getStringArrayList(ACCOUNTS_LIST_KEY), binding.account);
 		builder.setView(binding.getRoot());
 		builder.setPositiveButton(R.string.join, null);
 		builder.setNegativeButton(R.string.cancel, null);
-		AlertDialog dialog = builder.create();
+		final AlertDialog dialog = builder.create();
 		dialog.show();
 		dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> mListener.onJoinDialogPositiveClick(dialog, binding.account, binding.accountJidLayout, binding.jid, binding.bookmark.isChecked()));
 		binding.jid.setOnEditorActionListener((v, actionId, event) -> {

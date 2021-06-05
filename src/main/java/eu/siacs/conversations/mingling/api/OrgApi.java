@@ -1,6 +1,7 @@
 package eu.siacs.conversations.mingling.api;
 
 import eu.siacs.conversations.mingling.api.requests.OrganizationRequest;
+import eu.siacs.conversations.mingling.api.responses.GeneralResponse;
 import eu.siacs.conversations.mingling.models.User;
 
 import retrofit2.Call;
@@ -18,9 +19,9 @@ public interface OrgApi {
 
     @GET("/api/organization/check/")
     @Headers({"Content-Type: application/json"})
-    Call<String> getUsers(@Query("key") String key);
+    Call<GeneralResponse> checkOrgAvailability(@Query("key") String key);
 
     @POST("/api/users")
     @Headers({"Content-Type: application/json"})
-    Call<String> register(@Body User user);
+    Call<GeneralResponse> register(@Body User user);
 }
