@@ -19,8 +19,8 @@
     <string name="incoming_call_ringtone">content://settings/system/ringtone</string>
     <integer name="grace_period">144</integer>
     <integer name="auto_accept_filesize">524288</integer>
-    <string name="picture_compression">auto</string>
-    <bool name="use_green_background">true</bool>
+    <string name="picture_compression">always</string>
+    <bool name="use_green_background">false</bool>
     <string name="quick_action">recent</string>
     <bool name="show_dynamic_tags">false</bool>
     <bool name="btbv">true</bool>
@@ -40,10 +40,11 @@
     <bool name="show_individual_search_options">true</bool>
     <bool name="show_combined_search_options">false</bool>
     <bool name="scroll_to_bottom">true</bool>
-    <string name="omemo_setting_default">default_on</string>
+    <string name="omemo_setting_default">always</string>
     <string name="default_font_size">small</string>
     <bool name="use_share_location_plugin">false</bool>
     <bool name="start_searching">false</bool>
     <string name="video_compression">360</string>
-    <string name="default_channel_discovery">JABBER_NETWORK</string>
+    <string name="default_channel_discovery">LOCAL_SERVER</string>
+    <bool name="show_record_voice_btn">true</bool>
 </resources>

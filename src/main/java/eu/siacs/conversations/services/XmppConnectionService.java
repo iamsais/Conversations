@@ -4211,6 +4211,44 @@ public class XmppConnectionService extends Service {
         return findings.size() == 1 ? findings.get(0) : null;
     }
 
+    public Conversation findConversation(final Account account, final Jid jid, final boolean muc) {
+        synchronized (this.conversations) {
+            Conversation conversation = find(account, jid);
+            if (conversation != null) {
+                return conversation;
+            }
+            conversation = databaseBackend.findConversation(account, jid);
+            if (conversation != null) {
+                conversation.setStatus(Conversation.STATUS_AVAILABLE);
+                conversation.setAccount(account);
+                if (muc) {
+                    conversation.setMode(Conversation.MODE_MULTI);
+                    conversation.setContactJid(jid);
+                } else {
+                    conversation.setMode(Conversation.MODE_SINGLE);
+                    conversation.setContactJid(jid.asBareJid());
+                }
+                databaseBackend.updateConversation(conversation);
+            } else {
+                String conversationName;
+                Contact contact = account.getRoster().getContact(jid);
+                if (contact != null) {
+                    conversationName = contact.getDisplayName();
+                } else {
+                    conversationName = jid.getLocal();
+                }
+                if (muc) {
+                    conversation = new Conversation(conversationName, account, jid,
+                            Conversation.MODE_MULTI);
+                } else {
+                    conversation = new Conversation(conversationName, account, jid.asBareJid(),
+                            Conversation.MODE_SINGLE);
+                }
+            }
+            return conversation;
+        }
+    }
+
     public boolean markRead(final Conversation conversation, boolean dismiss) {
         return markRead(conversation, null, dismiss).size() > 0;
     }

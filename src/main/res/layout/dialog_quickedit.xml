@@ -13,14 +13,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:errorTextAppearance="@style/TextAppearance.Conversations.Design.Error"
-            app:hintTextAppearance="@style/TextAppearance.Conversations.Design.Hint">
+            style="@style/TextInputLayout.FilledBox">
 
             <eu.siacs.conversations.ui.widget.EmojiWrapperEditText
                 android:id="@+id/input_edit_text"
                 style="@style/Widget.Conversations.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:ems="10"
                 android:inputType="textPersonName">
 

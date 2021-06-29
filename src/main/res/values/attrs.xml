@@ -35,6 +35,7 @@
     <attr name="ic_send_photo_offline" format="reference" />
     <attr name="ic_send_picture_offline" format="reference" />
     <attr name="ic_send_text_offline" format="reference" />
+    <attr name="ic_attachment_offline" format="reference" />
     <attr name="ic_send_videocam_offline" format="reference" />
     <attr name="ic_send_voice_offline" format="reference" />
 
@@ -127,5 +128,11 @@
     </declare-styleable>
 
     <attr name="popupOverlayStyle" format="reference" />
+
+    <attr name="color_bubble_light" format="reference|color" />
+    <attr name="color_bubble_dark" format="reference|color" />
+    <attr name="color_bubble_date" format="reference|color" />
+    <attr name="color_bubble_warning" format="reference|color" />
+    <attr format="reference" name="cardStyle"/>
 
 </resources>

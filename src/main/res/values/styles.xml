@@ -159,4 +159,57 @@
     <style name="TextAppearance.Conversations.Body1.Secondary.OnDark" parent="TextAppearance.Conversations.Body1">
         <item name="android:textColor">@color/white70</item>
     </style>
+
+    <style name="Widget.Conversations.Button.Outline" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">?TextSizeBody2</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="strokeWidth">@dimen/outline_button_stroke_size</item>
+    </style>
+
+    <style name="Widget.Conversations.Button" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textSize">?TextSizeBody2</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="ConversationsTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ConversationsTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="CardViewStyle" parent="CardView">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="elevation">@dimen/card_corner_radius</item>
+    </style>
+
+    <style name="CardViewStyle.Light" parent="CardViewStyle">
+        <item name="cardBackgroundColor">?attr/color_background_secondary</item>
+    </style>
+
+    <style name="CardViewStyle.Dark" parent="CardViewStyle">
+        <item name="cardBackgroundColor">?attr/color_background_secondary</item>
+    </style>
+
+    <style name="CardViewStyle.Black" parent="CardViewStyle">
+        <item name="cardBackgroundColor">?attr/color_background_secondary</item>
+    </style>
+
+    <style name="TextInputLayout.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="errorTextAppearance">@style/TextAppearance.Conversations.Design.Error</item>
+        <item name="hintTextAppearance">@style/TextAppearance.Conversations.Design.Hint</item>
+    </style>
+
+    <style name="TextInputLayout.FilledBox.AutoComplete" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="errorTextAppearance">@style/TextAppearance.Conversations.Design.Error</item>
+        <item name="hintTextAppearance">@style/TextAppearance.Conversations.Design.Hint</item>
+    </style>
+
 </resources>

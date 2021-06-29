@@ -69,6 +69,7 @@ import eu.siacs.conversations.entities.Contact;
 import eu.siacs.conversations.entities.Conversation;
 import eu.siacs.conversations.entities.Message;
 import eu.siacs.conversations.entities.Presences;
+import eu.siacs.conversations.mingl.ui.AccountDetailsActivity;
 import eu.siacs.conversations.services.AvatarService;
 import eu.siacs.conversations.services.BarcodeProvider;
 import eu.siacs.conversations.services.QuickConversationsService;
@@ -286,7 +287,7 @@ public abstract class XmppActivity extends ActionBarActivity {
         builder.create().show();
     }
 
-    abstract void onBackendConnected();
+    protected abstract void onBackendConnected();
 
     protected void registerListeners() {
         if (this instanceof XmppConnectionService.OnConversationUpdate) {
@@ -519,7 +520,7 @@ public abstract class XmppActivity extends ActionBarActivity {
     }
 
     public void switchToContactDetails(Contact contact, String messageFingerprint) {
-        Intent intent = new Intent(this, ContactDetailsActivity.class);
+        Intent intent = new Intent(this, AccountDetailsActivity.class);
         intent.setAction(ContactDetailsActivity.ACTION_VIEW_CONTACT);
         intent.putExtra(EXTRA_ACCOUNT, contact.getAccount().getJid().asBareJid().toEscapedString());
         intent.putExtra("contact", contact.getJid().toEscapedString());

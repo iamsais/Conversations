@@ -260,12 +260,12 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
             case R.id.action_share_uri:
                 shareLink(false);
                 break;
-            case R.id.action_delete_contact:
-                builder.setTitle(getString(R.string.action_delete_contact))
-                        .setMessage(JidDialog.style(this, R.string.remove_contact_text, contact.getJid().toEscapedString()))
-                        .setPositiveButton(getString(R.string.delete),
-                                removeFromRoster).create().show();
-                break;
+//            case R.id.action_delete_contact:
+//                builder.setTitle(getString(R.string.action_delete_contact))
+//                        .setMessage(JidDialog.style(this, R.string.remove_contact_text, contact.getJid().toEscapedString()))
+//                        .setPositiveButton(getString(R.string.delete),
+//                                removeFromRoster).create().show();
+//                break;
             case R.id.action_edit_contact:
                 Uri systemAccount = contact.getSystemAccount();
                 if (systemAccount == null) {
@@ -287,12 +287,12 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
 
                 }
                 break;
-            case R.id.action_block:
-                BlockContactDialog.show(this, contact);
-                break;
-            case R.id.action_unblock:
-                BlockContactDialog.show(this, contact);
-                break;
+//            case R.id.action_block:
+//                BlockContactDialog.show(this, contact);
+//                break;
+//            case R.id.action_unblock:
+//                BlockContactDialog.show(this, contact);
+//                break;
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -301,28 +301,28 @@ public class ContactDetailsActivity extends OmemoActivity implements OnAccountUp
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.contact_details, menu);
         AccountUtils.showHideMenuItems(menu);
-        MenuItem block = menu.findItem(R.id.action_block);
-        MenuItem unblock = menu.findItem(R.id.action_unblock);
+//        MenuItem block = menu.findItem(R.id.action_block);
+//        MenuItem unblock = menu.findItem(R.id.action_unblock);
         MenuItem edit = menu.findItem(R.id.action_edit_contact);
-        MenuItem delete = menu.findItem(R.id.action_delete_contact);
+//        MenuItem delete = menu.findItem(R.id.action_delete_contact);
         if (contact == null) {
             return true;
         }
         final XmppConnection connection = contact.getAccount().getXmppConnection();
-        if (connection != null && connection.getFeatures().blocking()) {
-            if (this.contact.isBlocked()) {
-                block.setVisible(false);
-            } else {
-                unblock.setVisible(false);
-            }
-        } else {
-            unblock.setVisible(false);
-            block.setVisible(false);
-        }
-        if (!contact.showInRoster()) {
-            edit.setVisible(false);
-            delete.setVisible(false);
-        }
+//        if (connection != null && connection.getFeatures().blocking()) {
+//            if (this.contact.isBlocked()) {
+//                block.setVisible(false);
+//            } else {
+//                unblock.setVisible(false);
+//            }
+//        } else {
+//            unblock.setVisible(false);
+//            block.setVisible(false);
+//        }
+//        if (!contact.showInRoster()) {
+//            edit.setVisible(false);
+//            delete.setVisible(false);
+//        }
         return super.onCreateOptionsMenu(menu);
     }
 

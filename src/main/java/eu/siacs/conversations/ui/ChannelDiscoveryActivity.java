@@ -60,7 +60,7 @@ public class ChannelDiscoveryActivity extends XmppActivity implements MenuItem.O
     }
 
     @Override
-    void onBackendConnected() {
+    protected void onBackendConnected() {
         if (optedIn || method == ChannelDiscoveryService.Method.LOCAL_SERVER) {
             final String query;
             if (mMenuSearchView != null && mMenuSearchView.isActionViewExpanded()) {

@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="ConversationsTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/green600</item>
-        <item name="colorPrimaryDark">@color/green600</item>
-        <item name="colorAccent">@color/pink</item>
+    <!-- Base application theme. -->
+    <style name="Theme.Main" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ConversationsTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryLightColor</item>
         <item name="popupOverlayStyle">@style/ThemeOverlay.AppCompat.Light</item>
 
         <item name="color_background_primary">@color/grey50</item>
@@ -12,10 +27,15 @@
         <item name="color_background_tertiary">@color/grey300</item>
         <item name="color_background_overlay">@color/black12</item>
         <item name="color_warning">@color/red_a700</item>
-        <item name="TextColorOnline">@color/green600</item>
+        <item name="TextColorOnline">@color/primaryColor</item>
         <item name="TextColorError">@color/red800</item>
         <item name="edit_text_color">@color/black87</item>
         <item name="icon_tint">@color/black54</item>
+
+        <item name="color_bubble_light">@color/primaryLightBg</item>
+        <item name="color_bubble_dark">@color/grey50</item>
+        <item name="color_bubble_date">@color/lightgreen</item>
+        <item name="color_bubble_warning">@color/lightred</item>
 
         <item name="activity_background_search">@drawable/search_background_light</item>
         <item name="activity_background_no_results">@drawable/no_results_background_light</item>
@@ -72,7 +92,7 @@
 
         <item name="unread_count">@color/green700_desaturated</item>
 
-        <item name="conversations_overview_background">@color/green700</item>
+        <item name="conversations_overview_background">@color/primaryColor</item>
 
         <item name="icon_alpha" type="float">0.54</item>
         <item name="delete_icon_alpha" type="float">0.70</item>
@@ -146,19 +166,22 @@
         <item name="icon_enable_undecided_device" type="reference">
             @drawable/ic_new_releases_black_24dp
         </item>
+        <item name="ic_attachment_offline" type="reference">@drawable/ic_attachment</item>
 
-<!--        <item name="android:fontFamily">@font/opensans_regular</item>-->
-<!--        <item name="android:typeface">@font/opensans_regular</item>-->
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="fontFamily">@font/opensans_regular</item>
 
-        <item name="colorControlNormal">@color/grey200</item>
-        <item name="colorControlActivated">@color/pink</item>
+        <item name="colorControlNormal">@color/primaryLightColor</item>
+        <item name="colorControlActivated">@color/primaryLightColor</item>
         <item name="colorControlHighlight">@color/grey200</item>
+        <item name="floatingActionButtonStyle">@style/FloatingActionButtonStyle</item>
+        <item name="android:autoCompleteTextViewStyle">@style/TextInputLayout.FilledBox.AutoComplete</item>
     </style>
 
     <style name="ConversationsTheme.Dark" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/green800</item>
-        <item name="colorPrimaryDark">@color/green900</item>
-        <item name="colorAccent">@color/blue_a100</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryLightColor</item>
         <item name="popupOverlayStyle">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="android:navigationBarColor" tools:targetApi="21">@color/black</item>
 
@@ -174,7 +197,7 @@
         <item name="list_item_background">@drawable/list_item_background_dark</item>
         <item name="color_warning">@color/red_a100</item>
 
-        <item name="TextColorOnline">@color/green500</item>
+        <item name="TextColorOnline">@color/primaryColor</item>
         <item name="TextColorError">@color/red500</item>
         <item name="edit_text_color">@color/white</item>
         <item name="icon_tint">@color/white70</item>
@@ -235,7 +258,7 @@
 
         <item name="unread_count">@color/green900_desaturated</item>
 
-        <item name="conversations_overview_background">@color/green900</item>
+        <item name="conversations_overview_background">@color/primaryColor</item>
 
         <item name="icon_alpha" type="float">0.7</item>
         <item name="delete_icon_alpha" type="float">0.7</item>
@@ -309,7 +332,12 @@
         <item name="icon_enable_undecided_device" type="reference">
             @drawable/ic_new_releases_white_24dp
         </item>
+
+        <item name="ic_attachment_offline" type="reference">@drawable/ic_attachment</item>
+
         <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="fontFamily">@font/opensans_regular</item>
+        <item name="cardStyle">@style/CardViewStyle.Light</item>
     </style>
 
     <style name="ConversationsTheme.Medium" parent="ConversationsTheme">
@@ -361,8 +389,8 @@
     </style>
 
     <style name="ConversationsTheme.FullScreen" parent="@style/Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/green600</item>
-        <item name="colorPrimaryDark">@color/green700</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
@@ -374,12 +402,13 @@
     <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimaryDark">@color/splash_screen_status_bar</item>
         <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primaryDarkColor</item>
     </style>
 
     <style name="ConversationsTheme.Dialog" parent="@style/Theme.AppCompat.Light.Dialog">
-        <item name="colorPrimary">@color/green600</item>
-        <item name="colorPrimaryDark">@color/green700</item>
-        <item name="colorAccent">@color/blue_a400</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryLightColor</item>
         <item name="color_background_primary">@color/grey50</item>
         <item name="divider">@color/black12</item>
         <item name="TextSizeTitle">18sp</item>
@@ -389,9 +418,9 @@
     </style>
 
     <style name="ConversationsTheme.Dark.Dialog" parent="@style/Theme.AppCompat.Dialog">
-        <item name="colorPrimary">@color/green800</item>
-        <item name="colorPrimaryDark">@color/green900</item>
-        <item name="colorAccent">@color/blue_a100</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryLightColor</item>
         <item name="color_background_primary">@color/grey800</item>
         <item name="divider">@color/white12</item>
         <item name="TextSizeBody2">14sp</item>
@@ -417,6 +446,12 @@
     <style name="ConversationsTheme.Dark.Dialog.Large" parent="ConversationsTheme.Dark.Dialog">
         <item name="TextSizeBody2">18sp</item>
         <item name="TextSizeTitle">56sp</item>
+    </style>
+    
+    <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="background">?colorAccent</item>
+        <item name="backgroundTint">?colorAccent</item>
+        <item name="tint">@color/black</item>
     </style>
 
 </resources>

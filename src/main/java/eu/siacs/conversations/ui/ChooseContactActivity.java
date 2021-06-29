@@ -359,7 +359,7 @@ public class ChooseContactActivity extends AbstractSearchableListItemActivity im
     }
 
     @Override
-    void onBackendConnected() {
+    protected void onBackendConnected() {
         filterContacts();
         this.mActivatedAccounts.clear();
         for (Account account : xmppConnectionService.getAccounts()) {

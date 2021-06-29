@@ -48,6 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
+                    style="@style/TextInputLayout.FilledBox"
                     app:endIconMode="clear_text"
                     app:errorEnabled="false">
 
@@ -68,6 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
+                    style="@style/TextInputLayout.FilledBox"
                     app:endIconMode="clear_text"
                     app:errorEnabled="false">
 
@@ -93,6 +95,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password"
+                        style="@style/TextInputLayout.FilledBox"
                         app:endIconMode="password_toggle"
                         app:errorEnabled="false">
 

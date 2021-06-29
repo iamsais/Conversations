@@ -187,4 +187,10 @@ public class SendButtonTool {
 		return res;
 	}
 
+	public static boolean AttachmentsVisible(Conversation conversation) {
+		final boolean visible;
+		visible = conversation.getMode() != Conversation.MODE_MULTI || conversation.getAccount().httpUploadAvailable() && conversation.getMucOptions().participating();
+		return visible;
+	}
+
 }

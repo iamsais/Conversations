@@ -49,10 +49,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:contentDescription="@string/add_contact_or_create_or_join_group_chat"
-            app:backgroundTint="?colorPrimary"
-            app:sdMainFabClosedBackgroundColor="?colorPrimary"
+            app:backgroundTint="?colorAccent"
+            app:sdMainFabClosedBackgroundColor="?colorAccent"
             app:sdMainFabClosedSrc="@drawable/ic_add_white_24dp"
-            app:sdMainFabOpenedBackgroundColor="?colorPrimaryDark"
+            app:sdMainFabOpenedBackgroundColor="?colorAccent"
             app:sdOverlayLayout="@id/overlay"
             app:sdUseReverseAnimationOnClose="true" />
     </RelativeLayout>

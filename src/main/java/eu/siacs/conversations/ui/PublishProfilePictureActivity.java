@@ -16,25 +16,43 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import eu.siacs.conversations.BuildConfig;
 import eu.siacs.conversations.Config;
 import eu.siacs.conversations.R;
 import eu.siacs.conversations.entities.Account;
-import eu.siacs.conversations.mingling.utils.GeneralUtils;
+import eu.siacs.conversations.mingl.api.ApiServiceController;
+import eu.siacs.conversations.mingl.api.GeneralApi;
+import eu.siacs.conversations.mingl.models.dao.JsonDao;
+import eu.siacs.conversations.mingl.utils.GeneralUtils;
 import eu.siacs.conversations.services.XmppConnectionService;
 import eu.siacs.conversations.ui.interfaces.OnAvatarPublication;
 import eu.siacs.conversations.utils.PhoneHelper;
+import lombok.SneakyThrows;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-import static eu.siacs.conversations.mingling.utils.Constants.KEY_USER_PROFILE_URI;
+import static eu.siacs.conversations.mingl.utils.Constants.GOOGLE_TEMP_PHOTO;
+import static eu.siacs.conversations.mingl.utils.Constants.KEY_USER_PROFILE_URI;
 
 public class PublishProfilePictureActivity extends XmppActivity implements XmppConnectionService.OnAccountUpdate, OnAvatarPublication {
 
     public static final int REQUEST_CHOOSE_PICTURE = 0x1337;
-
-    private ImageView avatar;
+    private static final String TAG = PublishProfilePictureActivity.class.getSimpleName();
+    private final AtomicBoolean handledExternalUri = new AtomicBoolean(false);
+    private RoundedImageView avatar;
     private TextView hintOrWarning;
     private TextView secondaryHint;
     private Button cancelButton;
@@ -44,7 +62,6 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
     private Account account;
     private boolean support = false;
     private boolean publishing = false;
-    private final AtomicBoolean handledExternalUri = new AtomicBoolean(false);
     private final OnLongClickListener backToDefaultListener = new OnLongClickListener() {
 
         @Override
@@ -55,6 +72,30 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         }
     };
     private boolean mInitialAccountSetup;
+
+    public static void chooseAvatar(final Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            activity.startActivityForResult(
+                    Intent.createChooser(intent, activity.getString(R.string.attach_choose_picture)),
+                    REQUEST_CHOOSE_PICTURE
+            );
+        } else {
+            CropImage.activity()
+                    .setOutputCompressFormat(Bitmap.CompressFormat.PNG)
+                    .setAspectRatio(1, 1)
+                    .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
+                    .start(activity);
+        }
+    }
+
+    public static void cropUri(final Activity activity, final Uri uri) {
+        CropImage.activity(uri).setOutputCompressFormat(Bitmap.CompressFormat.PNG)
+                .setAspectRatio(1, 1)
+                .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
+                .start(activity);
+    }
 
     @Override
     public void onAvatarPublicationSucceeded() {
@@ -77,7 +118,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
     public void onAvatarPublicationFailed(int res) {
         runOnUiThread(() -> {
             hintOrWarning.setText(res);
-            hintOrWarning.setTextAppearance(this,R.style.TextAppearance_Conversations_Body1_Warning);
+            hintOrWarning.setTextAppearance(this, R.style.TextAppearance_Conversations_Body1_Warning);
             hintOrWarning.setVisibility(View.VISIBLE);
             publishing = false;
             togglePublishButton(true, R.string.publish);
@@ -97,12 +138,10 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         this.secondaryHint = findViewById(R.id.secondary_hint);
 
         // Set profile image from google login
-//        String photoUrl = GeneralUtils.getPreferenceValue(KEY_USER_PROFILE_URI);
-//        if(photoUrl != null && !photoUrl.isEmpty()){
-//            avatarUri = Uri.parse(photoUrl);
-//            if(avatarUri != null)
-//                loadImageIntoPreview(avatarUri);
-//        }
+        String photoUrl = GeneralUtils.getPreferenceValue(KEY_USER_PROFILE_URI);
+        if (photoUrl != null && !photoUrl.isEmpty()) {
+            downloadPhoto(photoUrl);
+        }
 
         this.publishButton.setOnClickListener(v -> {
             if (avatarUri != null) {
@@ -127,8 +166,77 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         this.defaultUri = PhoneHelper.getProfilePictureUri(getApplicationContext());
         if (savedInstanceState != null) {
             this.avatarUri = savedInstanceState.getParcelable("uri");
-            this.handledExternalUri.set(savedInstanceState.getBoolean("handle_external_uri",false));
+            this.handledExternalUri.set(savedInstanceState.getBoolean("handle_external_uri", false));
         }
+    }
+
+    private void downloadPhoto(String photoUrl) {
+
+        photoUrl = photoUrl.replace("s96-c", "s500-c");
+
+        GeneralApi generalApi = ApiServiceController.createService(GeneralApi.class, BuildConfig.BASE_URL, JsonDao.getClientAccessToken());
+        Call<ResponseBody> call = generalApi.downloadGoogleProfilePhoto(photoUrl);
+        call.enqueue(new Callback<ResponseBody>() {
+            @SneakyThrows
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String filePath = getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + GOOGLE_TEMP_PHOTO;
+                InputStream inputStream = null;
+                OutputStream outputStream = null;
+
+                try {
+                    byte[] fileReader = new byte[4096];
+
+                    long fileSize = response.body().contentLength();
+                    long fileSizeDownloaded = 0;
+
+                    inputStream = response.body().byteStream();
+                    outputStream = new FileOutputStream(filePath);
+
+                    while (true) {
+                        int read = inputStream.read(fileReader);
+
+                        if (read == -1) {
+                            break;
+                        }
+
+                        outputStream.write(fileReader, 0, read);
+                        fileSizeDownloaded += read;
+
+                        Log.d(TAG, "file download: " + fileSizeDownloaded + " of " + fileSize);
+                    }
+
+                    outputStream.flush();
+
+                } catch (IOException e) {
+                    //Exception
+                    Log.e(TAG, "Failed to download file: " + e.getMessage());
+
+                } finally {
+                    if (inputStream != null) {
+                        inputStream.close();
+                    }
+
+                    if (outputStream != null) {
+                        outputStream.close();
+                    }
+                }
+
+                ;
+
+
+
+                avatarUri = Uri.fromFile(new File(filePath));
+                if (avatarUri != null)
+                    loadImageIntoPreview(avatarUri);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
     }
 
     @Override
@@ -139,7 +247,6 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         outState.putBoolean("handle_external_uri", handledExternalUri.get());
         super.onSaveInstanceState(outState);
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,23 +268,6 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
             if (resultCode == RESULT_OK) {
                 cropUri(this, data.getData());
             }
-        }
-    }
-
-    public static void chooseAvatar(final Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            activity.startActivityForResult(
-                    Intent.createChooser(intent, activity.getString(R.string.attach_choose_picture)),
-                    REQUEST_CHOOSE_PICTURE
-            );
-        } else {
-            CropImage.activity()
-                    .setOutputCompressFormat(Bitmap.CompressFormat.PNG)
-                    .setAspectRatio(1, 1)
-                    .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
-                    .start(activity);
         }
     }
 
@@ -211,7 +301,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
 
         final Uri uri = intent != null ? intent.getData() : null;
 
-        if (uri != null && handledExternalUri.compareAndSet(false,true)) {
+        if (uri != null && handledExternalUri.compareAndSet(false, true)) {
             cropUri(this, uri);
             return;
         }
@@ -220,13 +310,6 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
             this.cancelButton.setText(R.string.skip);
         }
         configureActionBar(getSupportActionBar(), !this.mInitialAccountSetup && !handledExternalUri.get());
-    }
-
-    public static void cropUri(final Activity activity, final Uri uri) {
-        CropImage.activity(uri).setOutputCompressFormat(Bitmap.CompressFormat.PNG)
-                .setAspectRatio(1, 1)
-                .setMinCropResultSize(Config.AVATAR_SIZE, Config.AVATAR_SIZE)
-                .start(activity);
     }
 
     protected void loadImageIntoPreview(Uri uri) {
@@ -245,7 +328,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         if (bm == null) {
             togglePublishButton(false, R.string.publish);
             this.hintOrWarning.setVisibility(View.VISIBLE);
-            this.hintOrWarning.setTextAppearance(this,R.style.TextAppearance_Conversations_Body1_Warning);
+            this.hintOrWarning.setTextAppearance(this, R.style.TextAppearance_Conversations_Body1_Warning);
             this.hintOrWarning.setText(R.string.error_publish_avatar_converting);
             return;
         }
@@ -256,7 +339,7 @@ public class PublishProfilePictureActivity extends XmppActivity implements XmppC
         } else {
             togglePublishButton(false, R.string.publish);
             this.hintOrWarning.setVisibility(View.VISIBLE);
-            this.hintOrWarning.setTextAppearance(this,R.style.TextAppearance_Conversations_Body1_Warning);
+            this.hintOrWarning.setTextAppearance(this, R.style.TextAppearance_Conversations_Body1_Warning);
             if (account.getStatus() == Account.State.ONLINE) {
                 this.hintOrWarning.setText(R.string.error_publish_avatar_no_server_support);
             } else {

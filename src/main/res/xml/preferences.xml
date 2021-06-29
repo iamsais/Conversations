@@ -15,7 +15,8 @@
                 android:targetPackage="com.huawei.systemmanager" />
         </PreferenceScreen>
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_privacy">
+    <PreferenceCategory android:title="@string/pref_privacy"
+        android:key="privacy">
         <CheckBoxPreference
             android:defaultValue="@bool/confirm_messages"
             android:key="confirm_messages"
@@ -156,7 +157,8 @@
             android:summary="@string/pref_accept_files_summary"
             android:title="@string/pref_accept_files" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_ui_options">
+    <PreferenceCategory android:title="@string/pref_ui_options"
+        android:key="UI">
         <CheckBoxPreference
             android:defaultValue="@bool/use_green_background"
             android:key="use_green_background"

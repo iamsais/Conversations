@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,10 +32,11 @@
                     android:layout_marginTop="@dimen/publish_avatar_top_margin"
                     android:background="@drawable/account_image_border">
 
-                    <ImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/account_image"
                         android:layout_width="@dimen/publish_avatar_size"
-                        android:layout_height="@dimen/publish_avatar_size"/>
+                        android:layout_height="@dimen/publish_avatar_size"
+                        />
                 </FrameLayout>
 
                 <TextView

@@ -46,20 +46,25 @@ import eu.siacs.conversations.entities.Message;
 public class ConversationMenuConfigurator {
 
 	private static boolean microphoneAvailable = false;
+	private static boolean locationAvailable = false;
 
 	public static void reloadFeatures(Context context) {
 		microphoneAvailable = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE);
+		locationAvailable = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS) || context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LOCATION_NETWORK);
 	}
 
 	public static void configureAttachmentMenu(@NonNull Conversation conversation, Menu menu) {
 		final MenuItem menuAttach = menu.findItem(R.id.action_attach_file);
 
-		final boolean visible;
+		boolean visible;
 		if (conversation.getMode() == Conversation.MODE_MULTI) {
 			visible = conversation.getAccount().httpUploadAvailable() && conversation.getMucOptions().participating();
 		} else {
 			visible = true;
 		}
+		// Hide always
+		visible = false;
+
 		menuAttach.setVisible(visible);
 		if (!visible) {
 			return;
@@ -96,6 +101,9 @@ public class ConversationMenuConfigurator {
 			visible = Config.multipleEncryptionChoices();
 		}
 
+		// Always hide - As we allow only encrypted message
+		visible = false;
+
 		menuSecure.setVisible(visible);
 
 		if (!visible) {
@@ -123,5 +131,17 @@ public class ConversationMenuConfigurator {
 				none.setChecked(true);
 				break;
 		}
+	}
+
+	public static void configureQuickShareAttachmentMenu(@NonNull Conversation conversation, Menu menu, boolean hideVoice) {
+		final boolean visible = SendButtonTool.AttachmentsVisible(conversation);
+		if (!visible) {
+			return;
+		}
+		if (hideVoice) {
+			microphoneAvailable = false;
+		}
+		menu.findItem(R.id.attach_record_voice).setVisible(microphoneAvailable);
+		menu.findItem(R.id.attach_location).setVisible(locationAvailable);
 	}
 }

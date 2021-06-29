@@ -13,7 +13,6 @@
         android:id="@+id/action_share"
         android:icon="?attr/icon_share"
         android:orderInCategory="15"
-        app:showAsAction="always"
         android:title="@string/share_uri_with">
         <menu>
             <item
@@ -27,23 +26,42 @@
                 android:title="@string/show_qr_code"/>
         </menu>
     </item>
-    <item
-        android:id="@+id/action_delete_contact"
-        android:orderInCategory="10"
-        app:showAsAction="never"
-        android:title="@string/action_delete_contact"/>
 
     <item
-        android:id="@+id/action_block"
-        android:orderInCategory="72"
-        app:showAsAction="never"
-        android:title="@string/action_block_contact"/>
+        android:id="@+id/action_ongoing_call"
+        android:icon="?attr/icon_ongoing_call"
+        android:orderInCategory="9"
+        android:title="@string/return_to_ongoing_call"
+        app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_unblock"
-        android:orderInCategory="73"
-        app:showAsAction="never"
-        android:title="@string/action_unblock_contact"/>
+        android:id="@+id/action_audio_call"
+        android:icon="?attr/ic_make_audio_call"
+        android:title="@string/audio_call"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_video_call"
+        android:icon="?attr/ic_make_video_call"
+        android:title="@string/video_call"
+        app:showAsAction="always"/>
+
+<!--    <item-->
+<!--        android:id="@+id/action_delete_contact"-->
+<!--        android:orderInCategory="10"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="@string/action_delete_contact"/>-->
+
+<!--    <item-->
+<!--        android:id="@+id/action_block"-->
+<!--        android:orderInCategory="72"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="@string/action_block_contact"/>-->
+
+<!--    <item-->
+<!--        android:id="@+id/action_unblock"-->
+<!--        android:orderInCategory="73"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="@string/action_unblock_contact"/>-->
 
     <item
         android:id="@+id/action_accounts"

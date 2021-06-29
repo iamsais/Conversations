@@ -24,6 +24,7 @@
             android:id="@+id/name_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/TextInputLayout.FilledBox"
             app:errorTextAppearance="@style/TextAppearance.Conversations.Design.Error"
             app:hintTextAppearance="@style/TextAppearance.Conversations.Design.Hint">
 
@@ -42,12 +43,13 @@
             android:layout_height="wrap_content"
             android:hint="@string/xmpp_address"
             android:visibility="gone"
+            style="@style/TextInputLayout.FilledBox"
             app:errorTextAppearance="@style/TextAppearance.Conversations.Design.Error"
             app:hintTextAppearance="@style/TextAppearance.Conversations.Design.Hint">
 
             <AutoCompleteTextView
                 android:id="@+id/jid"
-                style="@style/Widget.Conversations.EditText"
+                style="@style/TextInputLayout.FilledBox.AutoComplete"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone|flagNoExtractUi"

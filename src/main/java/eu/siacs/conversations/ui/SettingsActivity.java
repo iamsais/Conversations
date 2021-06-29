@@ -83,7 +83,7 @@ public class SettingsActivity extends XmppActivity implements
 	}
 
 	@Override
-	void onBackendConnected() {
+    protected void onBackendConnected() {
 
 	}
 
@@ -249,6 +249,40 @@ public class SettingsActivity extends XmppActivity implements
 		if (deleteOmemoPreference != null) {
 			deleteOmemoPreference.setOnPreferenceClickListener(preference -> deleteOmemoIdentities());
 		}
+
+		hidePreference();
+	}
+
+	void hidePreference() {
+		PreferenceCategory UIPreferenceCategory = (PreferenceCategory) mSettingsFragment.findPreference("UI");
+		CheckBoxPreference useGreenBackground = (CheckBoxPreference) mSettingsFragment.findPreference("use_green_background");
+
+		if(UIPreferenceCategory != null && useGreenBackground != null){
+			UIPreferenceCategory.removePreference(useGreenBackground);
+		}
+
+		CheckBoxPreference showDynamicTags = (CheckBoxPreference) mSettingsFragment.findPreference("show_dynamic_tags");
+		if(UIPreferenceCategory != null && showDynamicTags != null){
+			UIPreferenceCategory.removePreference(showDynamicTags);
+		}
+
+		PreferenceCategory privacyPreferenceCategory = (PreferenceCategory) mSettingsFragment.findPreference("privacy");
+		ListPreference omemoPreference = (ListPreference) mSettingsFragment.findPreference(OMEMO_SETTING);
+		if(privacyPreferenceCategory != null && omemoPreference != null){
+			privacyPreferenceCategory.removePreference(omemoPreference);
+		}
+
+		PreferenceCategory notificationCategory = (PreferenceCategory) mSettingsFragment.findPreference("notification_category");
+		ListPreference gracePeriodLength = (ListPreference) mSettingsFragment.findPreference("grace_period_length");
+		if(notificationCategory != null && gracePeriodLength != null){
+			notificationCategory.removePreference(gracePeriodLength);
+		}
+
+//		PreferenceCategory attachmentsPreferenceCategory = (PreferenceCategory) mSettingsFragment.findPreference("attachments");
+//		ListPreference gracePeriodLength = (ListPreference) mSettingsFragment.findPreference("grace_period_length");
+//		if(attachmentsPreferenceCategory != null && gracePeriodLength != null){
+//			attachmentsPreferenceCategory.removePreference(gracePeriodLength);
+//		}
 	}
 
 	private void changeOmemoSettingSummary() {
